@@ -1,6 +1,19 @@
 function getValorComp(vComponete){
+
+/*	var fRetorno = null
+	var fComponente = document.getElementById(vComponete);
+
+
+	if(fComponente == null){}
+	else{
+		fRetorno = String(fComponente.value);
+
+	}
+
+	return fRetorno;*/
 	var fComponentej = "#"+vComponete;
 	return $(fComponentej).val();
+
 }
 
 
@@ -55,18 +68,13 @@ function maiuscula(vComp, vVerifica){
 	}
 }
 
-function exibirComp(vComp, vVisivel){
-
-	if(vComp == null||vVisivel == null){}else{
-
-		var fComp = "#"+vComp;
-		//Exibir
+function princ_exibirComp(vComp, vVisivel){
+	if(vComp != null||vVisivel != null){
 		if(vVisivel){
-			$(fComp).show();
+			document.getElementById(vComp).style.display = "block";
 		}
-		//Ocultar
-		if(vVisivel==false){
-			$(fComp).hide();
+		if(!vVisivel){
+			document.getElementById(vComp).style.display = "none";
 		}
 	}
 }
@@ -199,10 +207,7 @@ function princ_excAjaxJson(vUrl, funcao){
 }
 
 function princ_obterValorComp(vComp){
-
-		var fComponentej = "#"+vComp;
-		return $(fComponentej).val();
-
+	return document.getElementById(vComp).value;
 }
 
 function princ_alterarValorComp(vComp, vValor){
@@ -247,17 +252,11 @@ function princ_alterarValorComp(vComp, vValor){
 }
 
 function princ_desabilitarComp(vComp, vVerifica){
-
-	var fComponentej = "#"+vComp;
 	if(vVerifica){
-
-		$(fComponentej).addClass("disabled");
-
+		document.getElementById(vComp).disabled = true;
 	}else{
-
-		$(fComponentej).removeClass("disabled");
+		document.getElementById(vComp).disabled = false;
 	}
-
 }
 
 function princ_desabilitarComp_Mate(vComp, vVerifica){
@@ -408,7 +407,28 @@ function princ_limparDiv(vComp){
 	 document.getElementById(vComp).innerHTML="";
 }
 
+function princ_loadJS (url){
+	var scriptTag = document.createElement('script');
+	scriptTag.src = url;
+	document.body.appendChild(scriptTag);
+};
 
+function princ_loadSelect(comp, data){
+	if(data.length > 0){
+    for (var i=0; i < data.length; i++){
+      console.log(data[i].guiche);
+
+      var x = document.getElementById("checkin.fkguiche");
+      var c = document.createElement("option");
+      c.text = data[i].guiche;
+      c.value = data[i].pkguiche;
+      x.options.add(c, x.options.length + 1);
+
+    }
+  }else{
+    console.log("limpar grade");
+  }
+}
 
 //Máscaras
 $(".masc-data").mask("99/99/9999");
