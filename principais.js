@@ -1,6 +1,19 @@
 function getValorComp(vComponete){
+
+/*	var fRetorno = null
+	var fComponente = document.getElementById(vComponete);
+
+
+	if(fComponente == null){}
+	else{
+		fRetorno = String(fComponente.value);
+
+	}
+
+	return fRetorno;*/
 	var fComponentej = "#"+vComponete;
 	return $(fComponentej).val();
+
 }
 
 function getValorTabela(vComp, vColuna){
