@@ -1,63 +1,29 @@
 var parameters = [];
 
-function getValorComp(vComponete) {
-
-    var fComponentej = "#" + vComponete;
-    return $(fComponentej).val();
-}
-
-function getValorTabela(vComp, vColuna) {
-
+function princ_getValueTable(vComp, vColuna) {
     var fRetorno = null;
-
     $('#' + vComp + ' tbody').on('click', 'tr', function() {
         var fValor = $('td', this).eq(vColuna).text();
 
         fRetorno = fValor;
 
     });
-
     return fRetorno;
-
 }
 
-function divConfirma(vMsg) {
-    bootbox.confirm(vMsg, function(result) {
-        return result;
-    });
-};
-
-function CarregarJS(vURL) {
-
-    var script = document.createElement('script');
-    script.src = vURL;
-    document.body.appendChild(script);
-
+function princ_changeClass(vComp, vClass) {
+    document.getElementById(vComp).className = vClass;
 }
 
-function fecharForm() {
-    window.close();
-}
-
-function ocultarComp(vComp) {
-    $("#" + vComp).hide();
-}
-
-function alterarClass(vComp, vClasse) {
-    document.getElementById(vComp).className = vClasse;
-}
-
-function maiuscula(vComp, vVerifica) {
-
-    if (String(vVerifica) == 'T') {
-
-        fComp = vComp.value.toUpperCase();
-        vComp.value = uCase;
-
+function princ_toUpper(vComp, vVerifica) {
+    if(vVerifica){
+        vComp.value.toUpperCase();
+    }else{
+        vComp.value.toLowerCase();
     }
 }
 
-function princ_exibirComp(vComp, vVisivel) {
+function princ_showComp(vComp, vVisivel) {
     if (vComp != null || vVisivel != null) {
         if (vVisivel) {
             document.getElementById(vComp).style.display = "inline";
@@ -68,10 +34,8 @@ function princ_exibirComp(vComp, vVisivel) {
     }
 }
 
-function alterarValorComp(vComp, vValor) {
-
+function princ_changeValueComp(vComp, vValor) {
     if (vComp != null && vValor != null && vValor != undefined) {
-
         if (vComp.indexOf(":") != -1) {
             var param = vComp.split(":");
             var form = document.getElementById(param[0]);
@@ -81,70 +45,44 @@ function alterarValorComp(vComp, vValor) {
                     form.elements[i].value = vValor;
                 }
             }
-
         } else {
             document.getElementById(vComp).value = vValor;
         }
-
     } else {
         console.log("Component " + vComp + " not foud or value " + vValor + " inálido");
     }
 }
 
-function getVisivel(vComp) {
-
-    var fRetorno = false
+function isShow(vComp) {
+    var fRetorno = false;
     var fComp = "#" + vComp;
-
     if ($(fComp).is(':visible')) {
         fRetorno = true;
     }
-
     return fRetorno;
 }
 
-function princ_focarComp(vComp) {
-
+function princ_focus(vComp) {
     document.getElementById(vComp).focus();
 }
 
-function princ_apenasLeitura(vComp, vVerifica) {
-
-    var fComp = "#" + vComp;
-
-    $(fComp).prop('readonly', vVerifica);
-}
-
-function princ_ocultarComp(vComp) {
-    $("#" + vComp).hide();
-}
-
 function princ_extraiScript(texto) {
-
     var ini = 0;
     while (ini != -1) {
-
         ini = texto.indexOf('<script', ini);
-
         if (ini >= 0) {
-
-
             ini = texto.indexOf('>', ini) + 1;
-
             var fim = texto.indexOf('</script>', ini);
-
             codigo = texto.substring(ini, fim);
-            novo = document.createElement("script")
+            novo = document.createElement("script");
             novo.text = codigo;
-            document.body.appendChild(novo)
+            document.body.appendChild(novo);
         }
     }
 }
 
 function princ_openAjax() {
-
     var ajax;
-
     try {
         ajax = new XMLHttpRequest(); // XMLHttpRequest para Firefox, Safari, dentre outros.
     } catch (ee) {
@@ -181,14 +119,14 @@ function princ_excAjax(vComp, vUrl) {
                     var val = para[1].split("&");
                     for (var i = 0; i < val.length; i++) {
                         parameters.push(JSON.parse('{"pa":"' + val[i].split("=")[0] + '","val":"' + val[i].split("=")[1] + '"}'));
-                    };
+                    }
                 }
                 princ_extraiScript(resultado);
             } else {
                 vRenderiza.innerHTML = "Erro Ajax";
             }
         }
-    }
+    };
     ajax.send(null); // submete
 }
 
@@ -208,7 +146,7 @@ function princ_excAjaxJson(vUrl, funcao) {
                 console.log("erro");
             }
         }
-    }
+    };
     ajax.send(null); // submete
 }
 
@@ -231,12 +169,12 @@ function princ_excAjaxJsonTipo(vUrl, funcao, tipo) {
                 princ_exibirComp("loading", false);
             }
         }
-    }
+    };
     ajax.send(null); // submete
 }
 
 
-function princ_obterValorComp(vComp) {
+function princ_getValueComp(vComp) {
     try {
         if (vComp.indexOf(":") != -1) {
             var param = vComp.split(":");
@@ -255,48 +193,7 @@ function princ_obterValorComp(vComp) {
     }
 }
 
-function princ_alterarValorComp(vComp, vValor) {
-
-    var fComp = "#" + vComp;
-
-    if (vComp == null || vValor == null) {} else {
-
-        if ($(fComp).tagName == "TEXTAREA") {
-
-            $(fComp).jqteVal(vValor);
-
-        } else {
-            if ($(fComp).tagName == "SELECT") {
-
-                $(fComp + " option:selected").removeAttr("selected");
-
-                $(fComp + ' option[value="' + vValor + '"]').attr({ selected: "selected" });
-
-            } else {
-                if ($(fComp).type == "checkbox") {
-
-                    if (vValor == "true") {
-                        $(fComp).attr('checked', true);
-                        document.getElementById(vComp).value = vValor;
-
-                    } else {
-                        $(fComp).removeAttr('checked');
-                        document.getElementById(vComp).value = vValor;
-
-                    }
-
-                } else {
-                    document.getElementById(vComp).value = vValor;
-                }
-
-            }
-
-        }
-
-    }
-}
-
-function princ_desabilitarComp(vComp, vVerifica) {
+function princ_disabledComp(vComp, vVerifica) {
     if (vVerifica) {
         document.getElementById(vComp).disabled = true;
     } else {
@@ -304,88 +201,28 @@ function princ_desabilitarComp(vComp, vVerifica) {
     }
 }
 
-function princ_desabilitarComp_Mate(vComp, vVerifica) {
-
-    var fComponentej = "#" + vComp;
-    if (vVerifica) {
-
-        $(fComponentej).attr("disabled");
-
-    } else {
-
-        $(fComponentej).removeAttr("disabled");
-    }
-
-}
-
-function setCheck(vComp) {
-
-    var fValor = princ_obterValorComp(vComp);
-
-    if (fValor == "true") {
-
-        princ_alterarValorComp(vComp, "false");
-
-    } else {
-
-        princ_alterarValorComp(vComp, "true");
-
-    }
-
-}
-
-function princ_ocultarComp2(vComp, vVerifica) {
-
-    if (vVerifica) {
-        $("#" + vComp).hide();
-    } else {
-        $("#" + vComp).show();
-    }
-
-}
-
-function princ_confirma(vMsg) {
+function princ_confirma(vMsg){
     bootbox.confirm(vMsg, function(result) {
         return result;
     });
-};
-
-function princ_estaVisivel(vComp) {
-
-    var fRetorno = false
-    var fComp = "#" + vComp;
-
-    if ($(fComp).is(':visible')) {
-        fRetorno = true;
-    }
-
-    return fRetorno;
 }
 
-function princ_abrirPopUp(vUrl, vWidth, vHeight) {
-
+function princ_openPopUp(vUrl, vWidth, vHeight) {
     window.open(vUrl, "mywindow", "menubar=1,resizable=1,width=" + vWidth + ",height=" + vHeight);
 }
 
-function princ_obterIp(vUrl) {
-
+function princ_getIpURL(vUrl) {
     var fUrl = String(vUrl);
-
     var fPosicaoIni = fUrl.indexOf("//");
     fUrl = fUrl.substring((fPosicaoIni + 2), fUrl.length);
-
     var fPosicaoFim = fUrl.indexOf(":");
     var fIp = fUrl.substring(0, fPosicaoFim);
-
     return fIp;
-
 }
 
 function princ_obterParametroUrl(param) {
-
     var url = String(location.href).split("?");
     var params = url[1].split("&");
-
     for (var i = 0; i < params.length; i++) {
         var paramActual = params[i].split("=");
         if (paramActual[0] == param) {
@@ -394,11 +231,8 @@ function princ_obterParametroUrl(param) {
     }
 }
 
-
-function princ_formata_data(vData, vTipo) {
-
+function princ_format_date(vData, vTipo) {
     var fData = "";
-
     if (vData != null) {
         var data = new Date(vData);
         var dia = data.getDate();
@@ -439,29 +273,12 @@ function princ_formata_data(vData, vTipo) {
 
 }
 
-function princ_formata_hora(vHora) {
-
-    var hourObj = new Date(vHora);
-    var hora = hourObj.getHours();
-    var minutos = hourObj.getMinutes();
-    if (minutos < 10) {
-        minutos = "0" + minutos;
-    }
-    return hora + ":" + minutos;
-}
-
-function princ_limparSelect(vComp) {
+function princ_emptySelect(vComp) {
     document.getElementById(vComp).options.length = 1;
 }
 
-function princ_emptySelect(vComp) {
-    document.getElementById(vComp).options.length = 0;
-}
-
 function princ_execAjaxJquery(vUrl) {
-
     var fRetorno = false;
-
     $.ajax({
         type: "POST",
         url: vUrl,
@@ -470,31 +287,14 @@ function princ_execAjaxJquery(vUrl) {
             fRetorno = true;
         }
     });
-
     return fRetorno;
 }
 
-function princ_execAjaxJqueryRet(vUrl, vComp) {
-
-    $.ajax({
-        type: "POST",
-        url: vUrl,
-        dataType: "html",
-        success: function(dado) {
-
-            $("#" + vComp).html(dado);
-
-        }
-    });
-}
-
-function princ_limparGrade(vComp) {
-
+function princ_emptyTable(vComp) {
     $("#" + vComp + " tbody tr").remove();
-
 }
 
-function princ_limparDiv(vComp) {
+function princ_emptyDiv(vComp) {
     document.getElementById(vComp).innerHTML = "";
 }
 
@@ -502,13 +302,12 @@ function princ_loadJS(url) {
     var scriptTag = document.createElement('script');
     scriptTag.src = url;
     document.body.appendChild(scriptTag);
-};
+}
 
 function princ_loadSelect(comp, data) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
             console.log(data[i].guiche);
-
             var x = document.getElementById("checkin.fkguiche");
             var c = document.createElement("option");
             c.text = data[i].guiche;
@@ -521,62 +320,7 @@ function princ_loadSelect(comp, data) {
     }
 }
 
-function btnSalvarGeral(urlTest, tipo, values, func) {
-    $.ajax({
-        type: tipo,
-        url: urlTest,
-        dataType: "json",
-        data: values,
-        success: function(data) {
-            func(data);
-        },
-        error: function(data) {
-            console.error("ERROR no " + urlTe);
-        }
-    })
-}
-
 function princ_saveForm(comp, func) {
-    var idForm = comp.parentElement.parentElement.parentElement.id;
-    var actionForm = comp.parentElement.parentElement.parentElement.action;
-    var method = comp.parentElement.parentElement.parentElement.method;
-    $.ajax({
-        url: actionForm,
-        type: method,
-        data: $("#" + idForm).serialize(),
-        success: function(data) {
-            func(data);
-        },
-        error: function(data) {
-            msg('danger', data);
-        }
-    });
-}
-
-function princ_saveForm2(comp, func) {
-    princ_exibirComp("loading", true);
-    var idForm = comp.id;
-    var actionForm = comp.action;
-    var method = comp.method;
-    if (princ_checkForm(idForm)) {
-        $.ajax({
-            url: actionForm,
-            type: method,
-            data: $("#" + idForm).serialize() + "&to=" + sessionStorage.getItem("to"),
-            success: function(data) {
-                func(data);
-                princ_exibirComp("loading", false);
-            },
-            error: function(data) {
-                console.log(data);
-                func(data);
-                princ_exibirComp("loading", false);
-            }
-        });
-    }
-}
-
-function princ_saveForm3(comp, func) {
     $('#' + comp).submit(function(event) {
         princ_exibirComp("loading", true);
         $.ajax({
@@ -597,14 +341,6 @@ function princ_saveForm3(comp, func) {
         princ_exibirComp("loading", false);
         event.preventDefault();
     });
-}
-
-
-function princ_cancelForm(form, tab) {
-    princ_emptyForm(form);
-    if (tab != null) {
-        princ_toTab(tab)
-    }
 }
 
 function princ_emptyForm(form) {
@@ -629,7 +365,6 @@ function princ_onlyReadForm(form, check) {
         }
     }
 }
-
 
 function princ_checkForm(form) {
     var form = document.getElementById(form);
@@ -671,8 +406,6 @@ function princ_insertHTML(comp, valor) {
 function princ_appendHTML(comp, valor) {
     $("#" + comp).append(valor);
 }
-
-
 
 function getDayWeek(day) {
     if (day > -1) {
