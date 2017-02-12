@@ -478,3 +478,15 @@ function princ_substring(text, qnt) {
   }
     return "";
 }
+
+function addSessionStorage(item, valor){
+    sessionStorage.setItem(item, valor);
+}
+
+function getSessionStorage(item){
+    sessionStorage.getItem(item);
+}       
+
+function removeAllSessionStorage(){
+    sessionStorage.clear();
+}
