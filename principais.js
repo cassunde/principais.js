@@ -23,6 +23,10 @@ function princ_toUpper(vComp, vVerifica) {
     }
 }
 
+function toogleCase (s) {
+    return s === s.toUpperCase()? s.toLowerCase() : s.toUpperCase();
+}
+
 function princ_showComp(vComp, vVisivel) {
     if (vComp != null || vVisivel != null) {
         if (vVisivel) {
@@ -408,29 +412,7 @@ function princ_appendHTML(comp, valor) {
 }
 
 function getDayWeek(day) {
-    if (day > -1) {
-        if (day == 0) {
-            return "Domingo"
-        }
-        if (day == 1) {
-            return "Segunda"
-        }
-        if (day == 2) {
-            return "Terça"
-        }
-        if (day == 3) {
-            return "Quarta"
-        }
-        if (day == 4) {
-            return "Quinta"
-        }
-        if (day == 5) {
-            return "Sexta"
-        }
-        if (day == 6) {
-            return "Sábado"
-        }
-    }
+    return ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"][day]
 }
 
 function princ_json_to_str(data) {
@@ -462,14 +444,9 @@ function princ_leftZero(value, qnt) {
 }
 
 function princ_age(birthday) {
-    var d = new Date,
-        ano_atual = d.getFullYear(),
-        mes_atual = d.getMonth() + 1,
-        dia_atual = d.getDate(),
-        a = new Date(birthday),
-        quantos_anos = ano_atual - a.getFullYear();
-
-    return quantos_anos < 0 ? 0 : quantos_anos;
+    var ageDifMs = Date.now() - new Date(birthday).getTime();
+    var ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
 function princ_substring(text, qnt) {
