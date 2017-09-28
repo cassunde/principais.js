@@ -57,7 +57,7 @@ function princ_changeValueComp(vComp, vValor) {
     }
 }
 
-function isShow(vComp) {
+function princ_isShow(vComp) {
     var fRetorno = false;
     var fComp = "#" + vComp;
     if ($(fComp).is(':visible')) {
