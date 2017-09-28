@@ -1,16 +1,26 @@
 # principais.js
 simple library with sereval functions pre difinite.
 
-* Exemple1:
+*  see some samples
 
-**Js Pure:**
-document.getElementById("field").value;
+*  Get value component
 
-**Principais.js**
-princ_getValue("field"):String;
+> var value = princ_getValue("field"):String;
 
-* Exemple2:
-Verify div is visible
+*  Verify div is visible
 
-princ_isVisible("div"):Boolean;
+> princ_isShow("div"):Boolean;
 
+*  Disable a component
+
+> princ_disable("component", boolean);
+
+* get Value of parameter in url
+
+url = http://suapp.com.br/pagina?p1=abc&p2=poi
+
+>  princ_obterParametroUrl("p1):abc
+
+more...
+
+# Integration with [bootbox](http://bootboxjs.com/)
