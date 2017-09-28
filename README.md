@@ -1,4 +1,16 @@
 # principais.js
-Arquivo JavaScript com principais funções de uso no dia-a-dia, para deixar o código puro mais legivel.
-* Depende de jquery
-Para usar, basta importar no browser e usar a funções em seus arquivos .js
+simple library with sereval functions pre difinite.
+
+* Exemple1:
+
+**Js Pure:**
+document.getElementById("field").value;
+
+**Principais.js**
+princ_getValue("field"):String;
+
+* Exemple2:
+Verify div is visible
+
+princ_isVisible("div"):Boolean;
+
