@@ -1,7 +1,7 @@
 # principais.js
 simple library with sereval functions pre difinite.
 
-*  see some samples
+see some samples
 
 *  Get value component
 
