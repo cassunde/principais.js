@@ -19,8 +19,8 @@ see some samples
 
 url = http://suapp.com.br/pagina?p1=abc&p2=poi
 
->  princ_obterParametroUrl("p1):abc
+>  princ_obterParametroUrl("p1"):abc
 
 more...
 
-# Integration with [bootbox](http://bootboxjs.com/)
+Integration with [bootbox](http://bootboxjs.com/)
