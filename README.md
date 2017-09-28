@@ -21,3 +21,7 @@ url = http://suapp.com.br/pagina?p1=abc&p2=poi
 more...
 
 Integration with [bootbox](http://bootboxjs.com/)
+
+# Contribute
+
+to contribute just follow the default pattern 'princ_name_function():return'
